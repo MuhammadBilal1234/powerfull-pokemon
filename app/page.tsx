@@ -7,13 +7,13 @@ export default async function Home() {
     <main className="flex flex-col min-h-screen font-manrope">
       <Navbar hasUserLoggedIn={!userId} />
       <div className="flex-grow flex h-full flex-col bg-gray-200">
-        {userId && <AskForSignIn />}
+        {!userId && <AskForSignIn />}
       </div>
     </main>
   );
 }
 
-export function AskForSignIn() {
+function AskForSignIn() {
   return (
     <main className="flex items-center justify-center flex-grow h-full">
       <p
@@ -26,7 +26,7 @@ export function AskForSignIn() {
   );
 }
 
-export function Navbar({ hasUserLoggedIn }: { hasUserLoggedIn: Boolean }) {
+function Navbar({ hasUserLoggedIn }: { hasUserLoggedIn: Boolean }) {
   return (
     <main className="bg-gray-600 w-full">
       <nav className="w-full py-4  container flex items-center justify-between">
