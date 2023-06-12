@@ -1,4 +1,5 @@
 import { UserButton, auth, SignInButton } from "@clerk/nextjs";
+import PokemonGrid from "./data-grids/pokemon";
 
 export default async function Home() {
   const { userId } = auth();
@@ -6,8 +7,13 @@ export default async function Home() {
   return (
     <main className="flex flex-col min-h-screen font-manrope">
       <Navbar hasUserLoggedIn={!userId} />
-      <div className="flex-grow flex h-full flex-col bg-gray-200">
-        {!userId && <AskForSignIn />}
+      <div className="flex-grow flex h-full flex-col">
+        {!userId ? (
+          <AskForSignIn />
+        ) : (
+          // @ts-ignore
+          <PokemonGrid />
+        )}
       </div>
     </main>
   );
