@@ -21,6 +21,7 @@ import {
 import { Button } from "./button";
 import { Input } from "./input";
 import { useState } from "react";
+import AddPokemon from "../pokemon/AddPokemon";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -47,7 +48,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center gap-4 py-4">
         <Input
           placeholder="Filter Pokemons..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
@@ -56,6 +57,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <AddPokemon />
       </div>
       <div className="rounded-md border">
         <Table className="font-manrope w-full border-collapse border-none text-[1rem] min-w-[550px] overflow-auto">

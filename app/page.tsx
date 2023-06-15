@@ -1,6 +1,10 @@
 import { UserButton, auth, SignInButton } from "@clerk/nextjs";
 import PokemonGrid from "./data-grids/pokemon";
 
+import { db } from "./db";
+import { Button } from "./component/ui/button";
+import AddPokemon from "./component/pokemon/AddPokemon";
+
 export default async function Home() {
   const { userId } = auth();
 
