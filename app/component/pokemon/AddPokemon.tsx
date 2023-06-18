@@ -1,14 +1,29 @@
 "use client";
 
+import { createPokemon } from "@/app/server-actions/createPokemon";
 import { Button } from "../ui/button";
+import { useTransition } from "react";
+import { useToast } from "../ui/use-toast";
 
 export default function AddPokemon() {
-  async function addPokemontoDB() {
-    const firstPokemonAPI = await fetch("https://pokeapi.co/api/v2/pokemon/1/");
-    const firstPokemon = await firstPokemonAPI.json();
+  let [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
 
-    console.log(firstPokemon);
-  }
-
-  return <Button onClick={addPokemontoDB}>Add Pokemon</Button>;
+  return (
+    <Button
+      onClick={async () => {
+        try {
+          await createPokemon();
+        } catch (e: any) {
+          toast({
+            title: "Something went wrong!!!",
+            description: "Please Try again",
+            variant: "destructive",
+          });
+        }
+      }}
+    >
+      Add Pokemon
+    </Button>
+  );
 }

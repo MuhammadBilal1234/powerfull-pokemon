@@ -6,7 +6,7 @@ export const pokemonTypes = mysqlTable("pokmeon_types", {
   id: serial("id").primaryKey(),
   type: varchar("type", { length: 256 }),
   url: varchar("url", { length: 256 }),
-  pokemonId: int("pokemon_id").references(() => pokemon.id),
+  pokemonId: int("pokemon_id"),
 });
 
 export const pokemonTypesRelations = relations(pokemonTypes, ({ one }) => ({

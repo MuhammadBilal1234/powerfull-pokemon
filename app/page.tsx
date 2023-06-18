@@ -1,9 +1,21 @@
-import { UserButton, auth, SignInButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 import PokemonGrid from "./data-grids/pokemon";
-
-import { db } from "./db";
+import { cn } from "@/lib/utils";
+import { Navbar } from "./component/header";
+import { AskForSignIn } from "./component/pokemon/AskForSignIn";
+import { RenderingList } from "./component/pokemon/RenderingList";
 import { Button } from "./component/ui/button";
-import AddPokemon from "./component/pokemon/AddPokemon";
+
+const UsefulLinks = [
+  {
+    url: "https://nextjs.org/docs/getting-started/react-essentials",
+    title: "Next JS : React Essentials",
+  },
+  {
+    url: "https://nextjs.org/docs/app/building-your-application/data-fetching/fetching",
+    title: "Next JS : Data Fetching",
+  },
+];
 
 export default async function Home() {
   const { userId } = auth();
@@ -11,7 +23,58 @@ export default async function Home() {
   return (
     <main className="flex flex-col min-h-screen font-manrope">
       <Navbar hasUserLoggedIn={!userId} />
-      <div className="flex-grow flex h-full flex-col">
+
+      <div className="container py-5">
+        <h2 className="scroll-m-20  text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          React Server Component
+        </h2>
+
+        <p className="leading-7 [&:not(:first-child)]:mt-2 md:w-3/4">
+          This Page is rendered on the server. First User is fetched from the
+          clerk.dev.If user is loggedIn then grid will appear otherwise user
+          will be asked to create acocunt or login.
+        </p>
+        <p className="text-xl text-muted-foreground mt-2">
+          What is Server Component?
+        </p>
+        <p className="leading-7 [&:not(:first-child)]:mt-2 md:w-3/4">
+          In Simple Words. Server component get's created on the server. User
+          authentication and data fetching can be done on server and when it's
+          done. rendered HTML will be send to the client. Server component are
+          not interactive. We can't use Hooks, lifecycle methods and events. So
+        </p>
+        <p className="text-xl text-muted-foreground mt-2">
+          When to use Server Component?
+        </p>
+        <p className="leading-7 [&:not(:first-child)]:mt-2 md:w-3/4">
+          Main advantage to use server components is you can Access backend
+          resources (directly), Keep large dependencies on the server / Reduce
+          client-side JavaScript. For example. if you are using a package such
+          as lodash,moment or other. they have large size (to send to the
+          client). So now we can use those packages on the RSC and those will
+          not be sent to the clinet. Keeping Bundle size very small
+        </p>
+        <p className="text-xl text-muted-foreground mt-2">Useful Links</p>
+        <div className="my-1 ml-6 list-disc [&>li]:mt-2">
+          {UsefulLinks.map((item) => {
+            return (
+              <div>
+                <li>
+                  <Button asChild variant="link">
+                    <a href={item.url} target="_blank" className="text-lg">
+                      {item.title}
+                    </a>
+                  </Button>
+                </li>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <RenderingList />
+
+      <div className={cn("flex-grow flex h-full flex-col")}>
         {!userId ? (
           <AskForSignIn />
         ) : (
@@ -19,44 +82,6 @@ export default async function Home() {
           <PokemonGrid />
         )}
       </div>
-    </main>
-  );
-}
-
-function AskForSignIn() {
-  return (
-    <main className="flex items-center justify-center flex-grow h-full">
-      <p
-        className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0
-"
-      >
-        Please Sign In to View The Table
-      </p>
-    </main>
-  );
-}
-
-function Navbar({ hasUserLoggedIn }: { hasUserLoggedIn: Boolean }) {
-  return (
-    <main className="bg-gray-600 w-full">
-      <nav className="w-full py-4  container flex items-center justify-between">
-        <p
-          className="scroll-m-20 text-white text-2xl font-semibold tracking-tight
-"
-        >
-          React Server Component
-        </p>
-
-        {hasUserLoggedIn ? (
-          <SignInButton>
-            <main className="text-white cursor-pointer border hover:border border-white/25 py-2 px-4 rounded-lg">
-              Sign In
-            </main>
-          </SignInButton>
-        ) : (
-          <UserButton />
-        )}
-      </nav>
     </main>
   );
 }

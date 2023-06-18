@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter, Manrope } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "./component/ui/Toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.className}  ${manrope.variable}`}>
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

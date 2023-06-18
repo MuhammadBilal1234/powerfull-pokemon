@@ -22,6 +22,9 @@ import { Button } from "./button";
 import { Input } from "./input";
 import { useState } from "react";
 import AddPokemon from "../pokemon/AddPokemon";
+import { ValidatePokemon } from "@/lib/validators/pokemon";
+import { db } from "@/app/db";
+import { pokemon } from "@/app/db/schema/pokemon.schema";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

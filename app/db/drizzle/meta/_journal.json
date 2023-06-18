@@ -1,1 +1,34 @@
-{"version":"5","dialect":"mysql","entries":[{"idx":0,"version":"5","when":1686812880118,"tag":"0000_safe_psylocke","breakpoints":false},{"idx":1,"version":"5","when":1686812888530,"tag":"0001_daffy_hannibal_king","breakpoints":false}]}
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1686812880118,
+      "tag": "0000_safe_psylocke",
+      "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1686812888530,
+      "tag": "0001_daffy_hannibal_king",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1686822048901,
+      "tag": "0002_young_prowler",
+      "breakpoints": false
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1686832924155,
+      "tag": "0003_kind_matthew_murdock",
+      "breakpoints": false
+    }
+  ]
+}
