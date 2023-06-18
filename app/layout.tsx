@@ -1,7 +1,8 @@
 import "./globals.css";
 import { Inter, Manrope } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, auth } from "@clerk/nextjs";
 import { Toaster } from "./component/ui/Toaster";
+import { Navbar } from "./component/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { userId } = auth();
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className}  ${manrope.variable}`}>
+          <Navbar hasUserLoggedIn={!userId} />
           {children}
           <Toaster />
         </body>
